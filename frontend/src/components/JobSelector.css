@@ -1,0 +1,66 @@
+.job-selector-container {
+  width: 100%;
+}
+
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.job-card {
+  padding: 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.job-card:hover {
+  border-color: #667eea;
+  background: #f0f4ff;
+}
+
+.job-card.selected {
+  border-color: #667eea;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.job-title {
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.job-level {
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+.job-card.selected .job-level {
+  opacity: 0.9;
+}
+
+.loading-skeleton {
+  height: 100px;
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (max-width: 600px) {
+  .job-grid {
+    grid-template-columns: 1fr;
+  }
+}

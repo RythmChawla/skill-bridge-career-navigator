@@ -1,0 +1,121 @@
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: linear-gradient(90deg, #fff 0%, #f9fafb 100%);
+  border-bottom: 2px solid #e2e8f0;
+  color: #0f172a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.nav-logo {
+  font-weight: 800;
+  font-size: 18px;
+  background: linear-gradient(135deg, #3182ce 0%, #2c5aa0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: 2px solid transparent;
+  color: #4a5568;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-btn:hover {
+  background: #f0f4f8;
+  color: #2d3748;
+  transform: translateY(-1px);
+}
+
+.nav-btn.active {
+  background: linear-gradient(135deg, #3182ce 0%, #2c5aa0 100%);
+  color: white;
+  border-color: #2c5aa0;
+  box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+}
+
+.nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #3182ce, #2c5aa0);
+  border-radius: 2px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 8px;
+}
+
+.logout-btn {
+  background: #fed7d7;
+  border: 2px solid #fc8181;
+  color: #c53030;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #fc8181;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(252, 129, 129, 0.3);
+}
+
+@media (max-width: 768px) {
+  .nav-bar {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .nav-logo {
+    font-size: 16px;
+    width: 100%;
+    order: 1;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+  }
+
+  .nav-right {
+    order: 2;
+  }
+
+  .nav-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    flex: 1;
+    text-align: center;
+  }
+}

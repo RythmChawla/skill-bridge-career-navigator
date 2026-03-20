@@ -1,0 +1,34 @@
+.resume-viewer {
+  padding: 16px;
+}
+
+.resume-card {
+  background: #0f172a;
+  border: 1px solid #1f2937;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.resume-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.resume-frame {
+  width: 100%;
+  height: 80vh;
+  border: none;
+  border-radius: 10px;
+  background: #0b1220;
+}
+
+.card button {
+  background: #111827;
+  border: 1px solid #1f2937;
+  color: #e2e8f0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
