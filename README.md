@@ -2,7 +2,7 @@
 
 > An AI-powered career planning platform that helps learners assess their skills, discover aligned job roles, and generate personalized learning roadmaps. Built as a full-stack prototype demonstrating practical AI integration, responsible data handling, and scalable architecture.
 
-**Case Challenge Submission** | Name: Rythm Chawla | Scenario: Skill-Bridge Career Navigator
+**Case Challenge Submission** | Name: Rythm Chawla | Scenario: Skill-Bridge Career Navigator | [Demo Video](https://youtu.be/8WNyeHnfhzA)
 
 ---
 
@@ -322,7 +322,7 @@ pytest tests/test_api.py -v
 
 ## 🎬 Demo Video
 
-[Video link will be added in future]
+(https://youtu.be/8WNyeHnfhzA)
 
 ---
 
