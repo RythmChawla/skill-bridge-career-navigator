@@ -5,11 +5,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 24px;
-  background: linear-gradient(90deg, #fff 0%, #f9fafb 100%);
-  border-bottom: 2px solid #e2e8f0;
+  gap: 14px;
+  width: 100%;
+  padding: 12px clamp(14px, 2.6vw, 28px);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.95);
   color: #0f172a;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 0 1 auto;
 }
 
 .nav-logo {
@@ -22,12 +33,63 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
+}
+
+.nav-toggle {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #dbe4f0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-toggle:hover {
+  transform: translateY(-1px);
+  border-color: #93c5fd;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+}
+
+.nav-toggle span {
+  position: absolute;
+  left: 12px;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: #1e3a5f;
+  transition: transform 0.22s ease, opacity 0.18s ease, top 0.22s ease;
+}
+
+.nav-toggle span:nth-child(1) { top: 14px; }
+.nav-toggle span:nth-child(2) { top: 21px; }
+.nav-toggle span:nth-child(3) { top: 28px; }
+
+.nav-toggle.open span:nth-child(1) {
+  top: 21px;
+  transform: rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  top: 21px;
+  transform: rotate(-45deg);
 }
 
 .nav-links {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  justify-content: center;
+  flex: 1 1 420px;
+  min-width: 0;
 }
 
 .nav-btn {
@@ -41,6 +103,8 @@
   font-size: 0.95rem;
   transition: all 0.3s ease;
   position: relative;
+  min-width: 0;
+  white-space: nowrap;
 }
 
 .nav-btn:hover {
@@ -70,6 +134,7 @@
 .nav-right {
   display: flex;
   gap: 8px;
+  flex: 0 0 auto;
 }
 
 .logout-btn {
@@ -82,6 +147,7 @@
   font-weight: 600;
   font-size: 0.95rem;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .logout-btn:hover {
@@ -91,47 +157,75 @@
   box-shadow: 0 4px 12px rgba(252, 129, 129, 0.3);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .nav-bar {
-    padding: 12px 16px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
     gap: 12px;
   }
 
-  .nav-logo {
-    font-size: 16px;
-    width: 100%;
-    order: 1;
+  .nav-left {
+    min-width: 0;
+  }
+
+  .nav-toggle {
+    display: inline-block;
+    justify-self: end;
   }
 
   .nav-links {
-    order: 3;
+    grid-column: 1 / -1;
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: max-height 0.28s ease, opacity 0.22s ease, transform 0.22s ease, margin-top 0.22s ease;
   }
 
   .nav-right {
-    order: 2;
+    grid-column: 1 / -1;
     width: 100%;
+    justify-self: stretch;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: max-height 0.28s ease, opacity 0.22s ease, transform 0.22s ease, margin-top 0.22s ease;
   }
 
   .nav-btn {
-    padding: 6px 12px;
+    padding: 10px 12px;
     font-size: 0.9rem;
-    flex: 1;
     text-align: center;
   }
 
-  .logout-btn {
-    width: 100%;
+  .nav-bar.menu-open .nav-links,
+  .nav-bar.menu-open .nav-right {
+    max-height: 320px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    margin-top: 4px;
   }
 }
 
 @media (max-width: 520px) {
-  .nav-links {
-    flex-direction: column;
+  .nav-bar {
+    grid-template-columns: 1fr auto;
   }
 
-  .nav-btn {
+  .nav-links {
+    grid-template-columns: 1fr;
+  }
+
+  .logout-btn {
     width: 100%;
   }
 }

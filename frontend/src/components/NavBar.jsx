@@ -1,35 +1,72 @@
+import { useEffect, useState } from 'react'
 import './NavBar.css'
 
 export default function NavBar({ currentPage, onNavigate, onLogout }) {
+  const [menuOpen, setMenuOpen] = useState(false)
   const isActive = (page) => currentPage === page ? 'active' : ''
 
+  const handleNavigate = (page) => {
+    onNavigate(page)
+    setMenuOpen(false)
+  }
+
+  const handleLogout = () => {
+    setMenuOpen(false)
+    onLogout()
+  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 900) {
+        setMenuOpen(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   return (
-    <div className="nav-bar">
+    <div className={`nav-bar ${menuOpen ? 'menu-open' : ''}`}>
       <div className="nav-left">
-        <span className="nav-logo">🎯 Skill-Bridge</span>
+        <span className="nav-logo">Skill-Bridge</span>
       </div>
+
+      <button
+        type="button"
+        className={`nav-toggle ${menuOpen ? 'open' : ''}`}
+        aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={menuOpen}
+        onClick={() => setMenuOpen((open) => !open)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
       <div className="nav-links">
-        <button 
+        <button
           className={`nav-btn ${isActive('profile')}`}
-          onClick={() => onNavigate('profile')}
+          onClick={() => handleNavigate('profile')}
         >
-          👤 Profile
+          Profile
         </button>
-        <button 
+        <button
           className={`nav-btn ${isActive('resumeView')}`}
-          onClick={() => onNavigate('resumeView')}
+          onClick={() => handleNavigate('resumeView')}
         >
-          📄 Resume
+          Resume
         </button>
-        <button 
+        <button
           className={`nav-btn ${isActive('results')}`}
-          onClick={() => onNavigate('results')}
+          onClick={() => handleNavigate('results')}
         >
-          📊 Analysis
+          Analysis
         </button>
       </div>
+
       <div className="nav-right">
-        <button className="logout-btn" onClick={onLogout}>Logout</button>
+        <button className="logout-btn" onClick={handleLogout}>Logout</button>
       </div>
     </div>
   )
