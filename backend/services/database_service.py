@@ -1,6 +1,7 @@
 """Database service for CRUD operations"""
 import json
 import logging
+import os
 from typing import List, Optional
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
@@ -12,8 +13,21 @@ logger = logging.getLogger(__name__)
 class DatabaseService:
     """Service for database operations"""
     
-    def __init__(self, db_url: str = "sqlite:///./skill_bridge.db"):
-        self.engine = create_engine(db_url, connect_args={"check_same_thread": False})
+    def __init__(self, db_url: str = None):
+        # Use provided URL, environment variable, or default to SQLite
+        if db_url is None:
+            db_url = os.getenv("DATABASE_URL", "sqlite:///./skill_bridge.db")
+        
+        # SQLAlchemy requires postgresql:// not postgres://
+        if db_url.startswith("postgres://"):
+            db_url = db_url.replace("postgres://", "postgresql://", 1)
+        
+        # Configure engine based on database type
+        if db_url.startswith("postgresql"):
+            self.engine = create_engine(db_url, pool_pre_ping=True)
+        else:
+            self.engine = create_engine(db_url, connect_args={"check_same_thread": False})
+        
         Base.metadata.create_all(bind=self.engine)
         self.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
     

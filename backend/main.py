@@ -28,11 +28,14 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Enable CORS for frontend
+# Configure CORS based on environment
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+allow_credentials = os.getenv("ALLOW_CREDENTIALS", "true").lower() == "true"
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=allowed_origins,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -45,6 +48,10 @@ app.include_router(profiles.router)
 app.include_router(analysis.router)
 app.include_router(jobs.router)
 app.include_router(auth.router)
+
+# Create uploads directory if it doesn't exist
+uploads_dir = Path("uploads")
+uploads_dir.mkdir(exist_ok=True)
 
 # Serve uploaded resumes
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
