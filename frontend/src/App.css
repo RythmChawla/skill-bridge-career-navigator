@@ -37,6 +37,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: var(--bg-secondary);
   color: var(--fg-primary);
+  overflow-x: hidden;
 }
 
 .app {
@@ -45,6 +46,8 @@ body {
   color: var(--fg-primary);
   display: flex;
   flex-direction: column;
+  position: relative;
+  isolation: isolate;
 }
 
 .app-body {
@@ -56,6 +59,11 @@ body {
   animation: fadeIn 0.3s ease-out;
 }
 
+.app-body.auth-layout {
+  max-width: none;
+  padding: 0;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -64,6 +72,28 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes pageLift {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes softPulse {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
   }
 }
 
@@ -141,12 +171,27 @@ body {
     padding: 20px 16px;
   }
 
+  .app-body.auth-layout {
+    padding: 0;
+  }
+
   .card {
     padding: 20px;
   }
 
   .section-title {
     font-size: 1.25em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

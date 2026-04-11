@@ -27,6 +27,7 @@
 .nav-links {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .nav-btn {
@@ -110,6 +111,7 @@
 
   .nav-right {
     order: 2;
+    width: 100%;
   }
 
   .nav-btn {
@@ -117,5 +119,19 @@
     font-size: 0.9rem;
     flex: 1;
     text-align: center;
+  }
+
+  .logout-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .nav-links {
+    flex-direction: column;
+  }
+
+  .nav-btn {
+    width: 100%;
   }
 }

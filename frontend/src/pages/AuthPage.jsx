@@ -36,7 +36,7 @@ export default function AuthPage({ onSuccess, backendError }) {
 
   return (
     <div className="auth-page">
-      <div className="auth-card">
+      <div className={`auth-card ${mode === 'signup' ? 'signup-mode' : 'login-mode'}`}>
         <h1>{mode === 'login' ? 'Welcome back' : 'Create your account'}</h1>
         <p className="auth-subtitle">Sign in to analyze your skills and save profiles</p>
         {backendError && <div className="auth-error">{backendError}</div>}

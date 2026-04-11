@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import FileUpload from '../components/FileUpload'
 import SkillInput from '../components/SkillInput'
 import { createProfile, getJobs } from '../api/client'
+import { API_BASE_URL } from '../api/constants'
 import './ResumePage.css'
 
 export default function ResumePage({ onComplete, defaultName }) {
@@ -79,8 +80,7 @@ export default function ResumePage({ onComplete, defaultName }) {
       if (profileData.skills) {
         setSkills(profileData.skills)
       }
-      const base = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000'
-      const resume_url = profileData.resume_path ? `${base}/uploads/${profileData.resume_path}` : null
+      const resume_url = profileData.resume_path ? `${API_BASE_URL}/uploads/${profileData.resume_path}` : null
       setParsedMeta({
         email: profileData.email,
         phone: profileData.phone,

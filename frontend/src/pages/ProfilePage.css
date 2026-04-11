@@ -1,5 +1,6 @@
 .profile-page {
   padding: 12px 0 28px;
+  animation: pageLift 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .profile-shell {
@@ -10,6 +11,18 @@
   border-radius: 28px;
   padding: 24px;
   box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 12% 16%, rgba(59, 130, 246, 0.12), transparent 24%),
+    radial-gradient(circle at 88% 10%, rgba(34, 211, 238, 0.12), transparent 20%);
+  pointer-events: none;
 }
 
 .profile-hero {
@@ -22,6 +35,7 @@
   background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
   border-radius: 22px;
   color: #f8fafc;
+  animation: riseIn 0.6s ease both;
 }
 
 .profile-hero h1 {
@@ -67,6 +81,24 @@
   border-radius: 20px;
   padding: 18px;
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  animation: riseIn 0.55s ease both;
+}
+
+.main-column > *:nth-child(1),
+.side-column > *:nth-child(1) { animation-delay: 0.08s; }
+.main-column > *:nth-child(2),
+.side-column > *:nth-child(2) { animation-delay: 0.14s; }
+.main-column > *:nth-child(3) { animation-delay: 0.2s; }
+.main-column > *:nth-child(4) { animation-delay: 0.26s; }
+.main-column > *:nth-child(5) { animation-delay: 0.32s; }
+.main-column > *:nth-child(6) { animation-delay: 0.38s; }
+
+.section-card:hover,
+.field-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.08);
+  border-color: #cbd5e1;
 }
 
 .section-card.accent {
@@ -134,6 +166,16 @@
   background: #fff;
   color: #0f172a;
   outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.field-editor input:focus,
+.inline-add input:focus,
+.structured-field input:focus,
+.structured-field textarea:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.12);
+  transform: translateY(-1px);
 }
 
 .structured-field textarea {
@@ -157,12 +199,18 @@
   color: #0f172a;
   cursor: pointer;
   font-weight: 600;
+  transition: transform 0.18s ease, box-shadow 0.22s ease, background-color 0.22s ease, border-color 0.22s ease;
 }
 
 .action-btn.primary {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #fff;
   border-color: #2563eb;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
 .chip-row {
@@ -181,6 +229,12 @@
   background: #eff6ff;
   color: #1d4ed8;
   border: 1px solid #bfdbfe;
+  transition: transform 0.18s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.12);
 }
 
 .chip.static {
@@ -199,6 +253,14 @@
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   background: #fff;
+  animation: riseIn 0.45s ease both;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.structured-item:hover,
+.match-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
 }
 
 .structured-item.editor {
@@ -250,6 +312,7 @@
   border-radius: 16px;
   background: #fff;
   border: 1px solid #e2e8f0;
+  animation: riseIn 0.55s ease both;
 }
 
 .match-item p {
@@ -277,6 +340,7 @@
   .profile-hero {
     flex-direction: column;
     align-items: flex-start;
+    padding: 18px;
   }
 
   .hero-actions,
@@ -288,5 +352,34 @@
   .action-btn {
     flex: 1;
     justify-content: center;
+  }
+
+  .section-card,
+  .field-card,
+  .structured-item,
+  .match-item {
+    padding: 14px;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .profile-page {
+    padding: 0 0 18px;
+  }
+
+  .profile-hero h1 {
+    font-size: 1.55rem;
+  }
+
+  .section-card-head,
+  .field-card-head,
+  .structured-item-head,
+  .match-head {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

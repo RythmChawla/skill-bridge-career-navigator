@@ -116,7 +116,7 @@ export default function App() {
             onLogout={handleLogout}
           />
         )}
-        <div className="app-body">
+        <div className={`app-body ${currentPage === 'auth' ? 'auth-layout' : ''}`.trim()}>
           {currentPage === 'auth' && <AuthPage onSuccess={handleAuthSuccess} backendError={backendError} />}
           {currentPage === 'resume' && (
             <ResumePage onComplete={handleResumeUploaded} defaultName={user?.name} />
