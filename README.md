@@ -1,4 +1,5 @@
 # Skill-Bridge Career Navigator
+## Link: https://skill-bridge-career-frontend.vercel.app/
 
 > An AI-powered career planning platform that helps learners assess their skills, discover aligned job roles, and generate personalized learning roadmaps. Built as a full-stack prototype demonstrating practical AI integration, responsible data handling, and scalable architecture.
 
